@@ -32,7 +32,7 @@ void displayIdInfo()
 //-----------------------------------------------------------------------------------------
 //  You should use parameters for the dictionary, the word lengths array, 
 //  the length of words to use, and the total number of words.
-void readInWordsFromFile()
+void readInWordsFromFile(int lengthOfWordsToUse, vector<string> &dictionary)
 {
 	ifstream inputFileStream;
 	
