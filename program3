@@ -168,7 +168,7 @@ int main()
             case 1:
                 cout << "What length of words do you want to use? " << endl;
 		cin >> lengthOfWordsToUse;
-		dictChecker(dictionary, lengthOfWordsToUse)
+		dictChecker(dictionary, lengthOfWordsToUse);
                 break;
                 
             case 2:
