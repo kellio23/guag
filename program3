@@ -16,7 +16,7 @@ using namespace std;
 
 
 //---------------------------------------------------------------
-// Display ID info
+// Display ID info 
 //
 void displayIdInfo()
 {
