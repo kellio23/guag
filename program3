@@ -126,10 +126,42 @@ int main()
              << "   7. Display an answer sequence    \n"
              << "   8. Exit the program              \n"
              << "Your choice -> ";
-        cin >> menuOption;
+       cin >> menuOption;
         
-		// Menu option handling should go here
-		// ...
+        
+        switch(menuOption){
+            case 1:
+                cout << "Change word length " << endl;
+                break;
+                
+            case 2:
+                cout << "Display dictionary words " << endl;
+                break;
+                
+            case 3:
+                cout << "Get start and end words " << endl;
+                break;
+            case 4:
+                
+                cout << "Play the word change game " << endl;
+                break;
+                
+            case 5:
+                cout << "Find the end word with debug " << endl;
+                break;
+                
+            case 6:
+                cout << "Find the end word " << endl;
+                break;
+                
+            case 7:
+                cout << "Display an answer sequence " << endl;
+                break;
+                
+            case 8:
+                exit(-1);
+                break;
+        }
         
     } while( true);
 	
