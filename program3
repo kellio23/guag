@@ -50,7 +50,10 @@ void readInWordsFromFile(int lengthOfWordsToUse, vector<string> &dictionary)
 
 	// Read all the words from the file, and display them
     while( inputFileStream >> inputWord) {
-        cout << inputWord;     
+    	 if (inputWord.size() == lengthOfWordsToUse){
+            dictionary.push_back(inputWord);
+            cout << inputWord;
+        }
     }
     
     inputFileStream.close();    // Close the input file.
@@ -102,6 +105,7 @@ int main()
     string startWord = "dog";           // The start word for transformation
     string endWord = "cat";             // The end word for transformation
     int menuOption = -1;                // User menu option selection
+    readInWordsFromFile(lengthOfWordsToUse, dictionary);
 
     // Display ID info
     displayIdInfo();
@@ -131,7 +135,9 @@ int main()
         
         switch(menuOption){
             case 1:
-                cout << "Change word length " << endl;
+                cout << "What length of words do you want to use? " << endl;
+		cin >> lengthOfWordsToUse;
+		//func(dictionary, lengthOfWordsToUse)
                 break;
                 
             case 2:
