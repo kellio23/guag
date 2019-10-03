@@ -1,5 +1,5 @@
 /* ------------------------------------------------
- * sample.cpp
+ * main.cpp
  *
  * Class: Program #3 for CS 141, Fall 2019
  * System: Codio
@@ -135,5 +135,4 @@ int main()
 	
     return 0;
 }//end main()
-
-
+//test
