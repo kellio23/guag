@@ -95,6 +95,37 @@ long binarySearch(
     return -1;
 }//end binarySearch()
 
+void dictChecker(int lengthOfWordsToUse, vector<string> &dictionary)
+{
+	ifstream inputFileStream;
+	
+    string fileName = "dictionary.txt"; // C string (array of char) to store filename
+    string inputWord;				    // stores each word as it is read
+
+	// Open input file
+	inputFileStream.open( fileName.c_str() );
+	    
+   // Verify that the open worked
+    if( !inputFileStream.is_open()) {
+        cout << "Could not find input file " << fileName << "  Exiting..." << endl;
+        exit( -1);
+    }
+
+	// Read all the words from the file, and display them
+    while(getline (inputFileStream, inputWord)) {
+        if (inputWord.size() == lengthOfWordsToUse){
+            dictionary.push_back(inputWord);
+            cout << inputWord<<endl;
+               
+        }
+    }
+            
+       
+    
+    inputFileStream.close();    // Close the input file.
+}
+
+
 
 
 //-----------------------------------------------------------------------------------------
@@ -105,7 +136,7 @@ int main()
     string startWord = "dog";           // The start word for transformation
     string endWord = "cat";             // The end word for transformation
     int menuOption = -1;                // User menu option selection
-    readInWordsFromFile(lengthOfWordsToUse, dictionary);
+    //readInWordsFromFile(lengthOfWordsToUse, dictionary);
 
     // Display ID info
     displayIdInfo();
@@ -137,7 +168,7 @@ int main()
             case 1:
                 cout << "What length of words do you want to use? " << endl;
 		cin >> lengthOfWordsToUse;
-		//func(dictionary, lengthOfWordsToUse)
+		dictChecker(dictionary, lengthOfWordsToUse)
                 break;
                 
             case 2:
