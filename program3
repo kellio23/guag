@@ -52,7 +52,7 @@ void readInWordsFromFile(int lengthOfWordsToUse, vector<string> &dictionary)
     while( inputFileStream >> inputWord) {
     	 if (inputWord.size() == lengthOfWordsToUse){
             dictionary.push_back(inputWord);
-            cout << inputWord;
+            cout << inputWord << endl;
         }
     }
     
