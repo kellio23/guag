@@ -115,6 +115,9 @@ void dictChecker(int lengthOfWordsToUse, vector<string> &dictionary)
     while(getline (inputFileStream, inputWord)) {
         if (inputWord.size() == lengthOfWordsToUse){
             dictionary.push_back(inputWord);
+            if (isupper(inputWord.at(0))){
+                inputWord.at(0) = tolower(inputWord.at(0));
+            } 
             cout << inputWord<<endl;
                
         }
@@ -168,7 +171,7 @@ int main()
             case 1:
                 cout << "What length of words do you want to use? " << endl;
 		cin >> lengthOfWordsToUse;
-		dictChecker(dictionary, lengthOfWordsToUse);
+		dictChecker(lengthOfWordsToUse, dictionary);
                 break;
                 
             case 2:
