@@ -1,3 +1,4 @@
+  
 /* ------------------------------------------------
  * main.cpp
  *
@@ -95,11 +96,14 @@ long binarySearch(
     return -1;
 }//end binarySearch()
 
-void dictChecker(int lengthOfWordsToUse, vector<string> &dictionary)
+void dictChecker(int lengthOfWordsToUse, vector<string> &dictionary, int numOfWords[], int &totalWords)
 {
 	ifstream inputFileStream;
 	dictionary.clear();
 	
+    for(int i = 0; i < 30; i++){
+        numOfWords[i] = 0;
+    }
     string fileName = "dictionary.txt"; // C string (array of char) to store filename
     string inputWord;				    // stores each word as it is read
 
@@ -116,12 +120,14 @@ void dictChecker(int lengthOfWordsToUse, vector<string> &dictionary)
     while(getline (inputFileStream, inputWord)) {
         if (inputWord.size() == lengthOfWordsToUse){
             dictionary.push_back(inputWord);
+            
             if (isupper(inputWord.at(0))){
                 inputWord.at(0) = tolower(inputWord.at(0));
             } 
             cout << inputWord<<endl;
                
         }
+        numOfWords[inputWord.length()]++;   //add length count to the numOfWords array
     }
             
        
@@ -140,10 +146,14 @@ int main()
     string startWord = "dog";           // The start word for transformation
     string endWord = "cat";             // The end word for transformation
     int menuOption = -1;                // User menu option selection
+    int totalWords = 0;
+    int numOfWords[30];        // array of size 30, each index is the number of words, index 0 is word length 1
     //readInWordsFromFile(lengthOfWordsToUse, dictionary);
 
     // Display ID info
     displayIdInfo();
+    
+    
     
     // Seed the random number generator
     srand( 1);  // Change 1 to time(0) for non-predictable results, but leave as 1 for testing
@@ -172,7 +182,7 @@ int main()
             case 1:
                 cout << "What length of words do you want to use? " << endl;
 		cin >> lengthOfWordsToUse;
-		dictChecker(lengthOfWordsToUse, dictionary);
+		dictChecker(lengthOfWordsToUse, dictionary, numOfWords, totalWords);  //we have numOfWords[] getting filled but we have not printed it yet
                 break;
                 
             case 2:
