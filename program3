@@ -98,6 +98,7 @@ long binarySearch(
 void dictChecker(int lengthOfWordsToUse, vector<string> &dictionary)
 {
 	ifstream inputFileStream;
+	dictionary.clear();
 	
     string fileName = "dictionary.txt"; // C string (array of char) to store filename
     string inputWord;				    // stores each word as it is read
