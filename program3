@@ -136,6 +136,17 @@ void dictChecker(int lengthOfWordsToUse, vector<string> &dictionary, int numOfWo
 }
 
 
+void printNumOfWordsTable(int numOfWords[]){
+    
+    cout << "Word lengths where there are more than 1400 words:" << endl;
+    cout << "Length  How Many" << endl;
+    cout << "------  --------" << endl;
+    for (int i = 3; i < 18; i++){
+        cout << i << "  " << numOfWords[i] << endl;
+    }
+    
+}
+
 
 
 //-----------------------------------------------------------------------------------------
@@ -148,6 +159,9 @@ int main()
     int menuOption = -1;                // User menu option selection
     int totalWords = 0;
     int numOfWords[30];        // array of size 30, each index is the number of words, index 0 is word length 1
+    dictChecker(lengthOfWordsToUse, dictionary, numOfWords, totalWords);
+    printNumOfWordsTable(numOfWords);
+
     //readInWordsFromFile(lengthOfWordsToUse, dictionary);
 
     // Display ID info
