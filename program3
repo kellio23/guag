@@ -39,7 +39,7 @@ void readInWordsFromFile(int lengthOfWordsToUse, vector<string> &dictionary)
     int firstIndex = 0;
     int secondIndex = 0;
     
-    cout << "enter the start and end..." << endl;
+    cout << "What length of words do you want to use?" ;
     cin >> firstIndex;
     cin >> secondIndex;
     
@@ -157,6 +157,51 @@ void printNumOfWordsTable(int numOfWords[]){
     
 }
 
+void caseThree(vector<string> dictionary, string &startWord, string &endWord, int numberOfWords[]){
+    startWord = "dog";
+    endWord = "cat"; 
+    do{
+        cout << "Enter starting word, or 'r' for a random word: " ; 
+   
+        cin >> startWord;
+        if (startWord = 'exit'){
+        exit(-1);
+    }
+    if (startWord = 'r' ){
+        startWord = dictionary[rand()%dictionary.size()];
+        //end condition
+    }
+    
+    
+    
+    if (startWord.length() != 3){
+        
+        
+    }
+
+    
+        
+        
+        
+        
+    }
+    while (   ); 
+   
+    }
+
+    
+    
+    
+    
+    
+}
+    
+    
+    
+    
+        
+    
+
 
 
 
@@ -174,7 +219,7 @@ int main()
     dictionary.clear();
     int startIndex = 0;
     int endIndex = 0; // array of size 30, each index is the number of words, index 0 is word length 1
-    
+    int startingWord = 0;
     dictChecker(lengthOfWordsToUse, dictionary, numOfWords, totalWords);
     
     printNumOfWordsTable(numOfWords);
@@ -244,7 +289,9 @@ Length  How Many
                 break;
                 
             case 3:
-                cout << "Get start and end words " << endl;
+
+                
+                
                 break;
             case 4:
                 
