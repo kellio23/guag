@@ -200,7 +200,16 @@ int main()
                 break;
                 
             case 2:
-                cout << "Display dictionary words " << endl;
+                cout << "Enter the start and end index values of words to display:";
+                cin >> startIndex;
+                cin >> endIndex; 
+               readInWordsFromFile(lengthOfWordsToUse, dictionary);
+                while(startIndex <= endIndex){
+                    cout <<startIndex++ <<" "<< dictionary.at(startIndex);
+                    cout << endl; 
+		    
+		    }
+                    
                 break;
                 
             case 3:
