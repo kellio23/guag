@@ -35,8 +35,24 @@ void displayIdInfo()
 void readInWordsFromFile(int lengthOfWordsToUse, vector<string> &dictionary)
 {
 	ifstream inputFileStream;
-	
-    string fileName = "dictionary.txt"; // C string (array of char) to store filename
+    
+    int firstIndex = 0;
+    int secondIndex = 0;
+    
+    cout << "enter the start and end..." << endl;
+    cin >> firstIndex;
+    cin >> secondIndex;
+    
+    int startIndex = 0;
+    
+    for(int i = firstIndex; i <= secondIndex; i++){
+        cout << setw(5) << i << " " << dictionary[i] << endl;
+    }
+    cout << endl;
+    }
+
+
+/*    string fileName = "dictionary.txt"; // C string (array of char) to store filename
     string inputWord;				    // stores each word as it is read
 
 	// Open input file
@@ -50,19 +66,18 @@ void readInWordsFromFile(int lengthOfWordsToUse, vector<string> &dictionary)
 
 	// Read all the words from the file, and display them
     while( inputFileStream >> inputWord) {
-    	 if (inputWord.size() == lengthOfWordsToUse){
-            dictionary.push_back(inputWord);
-             if (isupper(inputWord.at(0))){
-                inputWord.at(0) = tolower(inputWord.at(0));
-             }
-            //cout << inputWord << endl;
+    	 if (inputWord.length() == lengthOfWordsToUse){
+            for(int i = 0; i < inputWord.length(); i++){
+                inputWord[i] = tolower(inputWord[i]);
+            }
+             dictionary.push_back(inputWord);
         }
+        numOfWords[inputWord.length()]++; 
     }
-    
+
     inputFileStream.close();    // Close the input file.
 }
-
-
+*/
 //--------------------------------------------------------------------------------------
 // Use binary search to look up the search word in the dictionary vector, returning
 // the word's index if found, -1 otherwise.
@@ -119,21 +134,16 @@ void dictChecker(int lengthOfWordsToUse, vector<string> &dictionary, int numOfWo
     }
 
 	// Read all the words from the file, and display them
-    while(getline (inputFileStream, inputWord)) {
-        if (inputWord.size() == lengthOfWordsToUse){
-            dictionary.push_back(inputWord);
-            
-            if (isupper(inputWord.at(0))){
-                inputWord.at(0) = tolower(inputWord.at(0));
-            } 
-            //cout << inputWord<<endl;
-               
+     while( inputFileStream >> inputWord) {
+    	 if (inputWord.length() == lengthOfWordsToUse){
+            for(int i = 0; i < inputWord.length(); i++){
+                inputWord[i] = tolower(inputWord[i]);
+            }
+             dictionary.push_back(inputWord);
         }
-        numOfWords[inputWord.length()]++;   //add length count to the numOfWords array
+        numOfWords[inputWord.length()]++; 
     }
-            
-       
-    
+
     inputFileStream.close();    // Close the input file.
 }
 void printNumOfWordsTable(int numOfWords[]){
@@ -160,10 +170,13 @@ int main()
     string endWord = "cat";             // The end word for transformation
     int menuOption = -1;                // User menu option selection
     int totalWords = 0;
-    int numOfWords[30];  
+    int numOfWords[30] = {0};
+    dictionary.clear();
     int startIndex = 0;
     int endIndex = 0; // array of size 30, each index is the number of words, index 0 is word length 1
+    
     dictChecker(lengthOfWordsToUse, dictionary, numOfWords, totalWords);
+    
     printNumOfWordsTable(numOfWords);
 
     //readInWordsFromFile(lengthOfWordsToUse, dictionary);
@@ -225,16 +238,8 @@ Length  How Many
                 break;
                 
             case 2:
-                cout << "Enter the start and end index values of words to display:";
-                cin >> startIndex;
-                cin >> endIndex; 
+                
                readInWordsFromFile(lengthOfWordsToUse, dictionary);
-                while(startIndex <= endIndex){
-                    cout <<startIndex++ <<" "<< dictionary.at(startIndex);
-                    cout << endl; 
-                    
-                }
-
              
                 break;
                 
