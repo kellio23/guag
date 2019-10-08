@@ -169,9 +169,7 @@ void caseThree(vector<string> dictionary, string &startWord, string &endWord, in
         
        
         
-        cout <<"Enter starting word, or 'r' for a random word: "<<endl;
-        cin >> endWord;
-        
+      
        
         
         if (startWord == "exit")
@@ -209,8 +207,7 @@ void caseThree(vector<string> dictionary, string &startWord, string &endWord, in
         
        
         
-        cout <<"Enter starting word, or 'r' for a random word: "<<endl;
-        cin >> endWord;
+       
         
        
         
