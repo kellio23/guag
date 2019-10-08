@@ -237,17 +237,40 @@ void wordChangeGame(int lengthOfWordsToUse, string startWord, string endWord,vec
       if (startWord ==" " && endWord== " "){
         cout<<"*** "<< startWord <<" is not of length 3. Please retry."<<endl;
       }
-        //if startword or endword = exit, return to menu  
+        //cout <<"***" << startWord << "is not in the dictionary. Please retry."<< endl;  
        
        do{
            counter++;
            cout << counter <<  ".  Previous word is '" << previousWord << "'.  Next word: ";
            cin >> nextWord;
+           
+           for(int i= 0; i<lengthOfWordsToUse; i++){
+               
+           }
+           
+           //for loop
+           //
+           //if statement, prints out error message else 
+           
+           
+           
+           
+           if(nextWord == "exit"){
+               break;
+           }
            if(binarySearch(nextWord, dictionary) != -1){
                previousWord = nextWord;
+               
             }
+           else if(nextWord.length() != lengthOfWordsToUse){
+            cout<<"*** "<< nextWord <<" is not of length 3. Please retry."<<endl;
+            continue;
+           }
+               
+               
+               
            else if(binarySearch(nextWord, dictionary) == -1){
-            cout<<"*** "<< currentWord <<" is not in the dictionary. Please retry."<<endl; //error
+            cout<<"*** '" << nextWord << "' is not in the dictionary. Please retry."<<endl; //error
             continue;
             }
            // add second error for length
@@ -259,10 +282,7 @@ void wordChangeGame(int lengthOfWordsToUse, string startWord, string endWord,vec
                cout <<"Congratulations, you did it!" <<endl;
                break;
            }
-           else if(nextWord == "exit"){
-               x = 1;
-               exit(-1);
-           }
+           
            
            
            
