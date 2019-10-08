@@ -165,9 +165,14 @@ void caseThree(vector<string> dictionary, string &startWord, string &endWord, in
     do{
         cout << "Enter starting word, or 'r' for a random word: " ; 
    
-        cin >> startWord;
+        cin >> startWord; 
         
+       
+        
+        cout <<"Enter starting word, or 'r' for a random word: "<<endl;
         cin >> endWord;
+        
+       
         
         if (startWord == "exit")
          {
@@ -175,39 +180,76 @@ void caseThree(vector<string> dictionary, string &startWord, string &endWord, in
          }
         if (startWord == "r" ){
         startWord = dictionary[rand()%dictionary.size()];
-        endWord = dictionary[rand()%dictionary.size()];
         //end condition
         }
         else if(startWord.length() != lengthOfWordsToUse){
-            // error message
-            continue;
-        }
-        else if(endWord.length() != lengthOfWordsToUse){
-            // error message
+            cout<<"*** "<< startWord <<" is not of length 3. Please retry."<<endl;
             continue;
         }
         
         else if(binarySearch(startWord, dictionary) == -1){
-            //error
+            cout<<"*** "<< startWord <<" is not in the dictionary. Please retry."<<endl;//error
             continue;
         }
+   
+        doLoopInt = 1;
+        
+    
+    
+        
+        
+    
+    
+    }
+    while (doLoopInt == 0); 
+    do{
+        cout << "Enter starting word, or 'r' for a random word: " ; 
+   
+        cin >> endWord; 
+        
+       
+        
+        cout <<"Enter starting word, or 'r' for a random word: "<<endl;
+        cin >> endWord;
+        
+       
+        
+        if (startWord == "exit")
+        {
+            exit(-1);
+        }
+       
+     if (endWord == "r" ){
+        endWord = dictionary[rand()%dictionary.size()];
+     }
+        
+         else if(endWord.length() != lengthOfWordsToUse){
+            cout<<"*** " << endWord << " is not of length 3. Please retry."<<endl;
+            continue;
+            
+            
+        }
         else if(binarySearch(endWord, dictionary) == -1){
-            //error
+            cout<<"*** "<< endWord <<" is not in the dictionary. Please retry."<<endl; //error
             continue;
         }
         doLoopInt = 1;
         
     
     
-    if (startWord.length() != 3){
         
         
-    }
+    
     
     }
     while (doLoopInt == 0); 
    
-    }
+}
+
+
+    
+
+  
   
 
 
@@ -215,12 +257,7 @@ void caseThree(vector<string> dictionary, string &startWord, string &endWord, in
     
     
     
-        
-    
-
-
-
-
+   
 
 //-----------------------------------------------------------------------------------------
 int main()
