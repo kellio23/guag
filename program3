@@ -229,6 +229,7 @@ void wordChangeGame(int lengthOfWordsToUse, string startWord, string endWord,vec
     string nextWord = "";
     string currentWord = "";
     int counter = 0;
+    int letterCounter = 0;
     int x = 0;
     // startWord = nextWord
     // 
@@ -247,17 +248,27 @@ void wordChangeGame(int lengthOfWordsToUse, string startWord, string endWord,vec
            for(int i= 0; i<lengthOfWordsToUse; i++){
                
            }
-           
-           //for loop
-           //
-           //if statement, prints out error message else 
-           
-           
-           
-           
+        
            if(nextWord == "exit"){
                break;
            }
+           
+           //forLoop
+           letterCounter = 0;
+           for(int i = 0; i < lengthOfWordsToUse; i++){
+               if(nextWord.at(i) == previousWord.at(i)){
+                   letterCounter++;
+               }
+               
+           }
+           if(letterCounter != lengthOfWordsToUse - 1){
+               cout << "*** " << "'" << nextWord << "'" << " must be exactly 1 character different.  Please retry." << endl;
+               continue;
+           }
+           
+           
+           
+           
            if(binarySearch(nextWord, dictionary) != -1){
                previousWord = nextWord;
                
@@ -282,20 +293,9 @@ void wordChangeGame(int lengthOfWordsToUse, string startWord, string endWord,vec
                cout <<"Congratulations, you did it!" <<endl;
                break;
            }
-           
-           
-           
-           
-           
-           
-           
-       }while(x == 0);
        
-          
-        
-
-        
-        
+       }while(x == 0);
+      
     }
     
 
