@@ -181,7 +181,7 @@ void caseThree(vector<string> dictionary, string &startWord, string &endWord, in
         }
         
         else if(binarySearch(startWord, dictionary) == -1){
-            cout<<"*** "<< startWord <<" is not in the dictionary. Please retry."<<endl;//error
+            cout<<"***"<< startWord <<" is not in the dictionary. Please retry."<<endl;//error
             continue;
         }
    
@@ -243,10 +243,10 @@ void wordChangeGame(int lengthOfWordsToUse, string startWord, string endWord,vec
            counter++;
            cout << counter <<  ".  Previous word is '" << previousWord << "'.  Next word: ";
            cin >> nextWord;
-           if(binarySearch(currentWord, dictionary) != -1){
-            currentWord = previousWord;
+           if(binarySearch(nextWord, dictionary) != -1){
+               previousWord = nextWord;
             }
-           else if(binarySearch(currentWord, dictionary) == -1){
+           else if(binarySearch(nextWord, dictionary) == -1){
             cout<<"*** "<< currentWord <<" is not in the dictionary. Please retry."<<endl; //error
             continue;
             }
