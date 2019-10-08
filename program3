@@ -167,20 +167,31 @@ void caseThree(vector<string> dictionary, string &startWord, string &endWord, in
    
         cin >> startWord;
         
-        if (startWord == 'exit')
+        cin >> endWord;
+        
+        if (startWord == "exit")
          {
         exit(-1);
          }
-        if (startWord == 'r' ){
+        if (startWord == "r" ){
         startWord = dictionary[rand()%dictionary.size()];
+        endWord = dictionary[rand()%dictionary.size()];
         //end condition
         }
         else if(startWord.length() != lengthOfWordsToUse){
             // error message
             continue;
         }
+        else if(endWord.length() != lengthOfWordsToUse){
+            // error message
+            continue;
+        }
         
         else if(binarySearch(startWord, dictionary) == -1){
+            //error
+            continue;
+        }
+        else if(binarySearch(endWord, dictionary) == -1){
             //error
             continue;
         }
@@ -294,7 +305,7 @@ Length  How Many
                 break;
                 
             case 3:
-
+                caseThree(dictionary,startWord,endWord,numOfWords,lengthOfWordsToUse);
                 
                 
                 break;
