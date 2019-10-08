@@ -28,7 +28,6 @@ void displayIdInfo()
          << " \n";
 }//end displayIDInfo()
 
-
 //-----------------------------------------------------------------------------------------
 //  You should use parameters for the dictionary, the word lengths array, 
 //  the length of words to use, and the total number of words.
@@ -167,10 +166,6 @@ void caseThree(vector<string> dictionary, string &startWord, string &endWord, in
    
         cin >> startWord; 
         
-       
-        
-      
-       
         
         if (startWord == "exit")
          {
@@ -192,11 +187,7 @@ void caseThree(vector<string> dictionary, string &startWord, string &endWord, in
    
         doLoopInt = 1;
         
-    
-    
-        
-        
-    
+ 
     
     }
     while (doLoopInt == 0); 
@@ -204,12 +195,6 @@ void caseThree(vector<string> dictionary, string &startWord, string &endWord, in
         cout << "Enter starting word, or 'r' for a random word: " ; 
    
         cin >> endWord; 
-        
-       
-        
-       
-        
-       
         
         if (startWord == "exit")
         {
@@ -233,29 +218,34 @@ void caseThree(vector<string> dictionary, string &startWord, string &endWord, in
         doLoopInt = 1;
         
     
-    
-        
-        
-    
-    
     }
     while (doLoopInt == 0); 
    
 }
 
-
-    
-
-  
-  
-
-
+void wordChangeGame(int lengthOfWordsToUse, string startWord, string endWord,vector<string>dictionary)
+{
+    //counter = 0
+    // startWord = nextWord
+    // 
     
     
-    
-    
-   
+      if (startWord ==" " && endWord== " "){
+        cout<<"*** "<< startWord <<" is not of length 3. Please retry."<<endl;
+        
+        //if startword or endword = exit, return to menu  
+       
+       
+        
 
+        
+        
+    }
+    
+}
+
+
+ 
 //-----------------------------------------------------------------------------------------
 int main()
 {
@@ -344,8 +334,8 @@ Length  How Many
                 
                 break;
             case 4:
+                //wordChangeGame(dictionary,startWord,endWord);
                 
-                cout << "Play the word change game " << endl;
                 break;
                 
             case 5:
