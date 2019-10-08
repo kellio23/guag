@@ -157,44 +157,49 @@ void printNumOfWordsTable(int numOfWords[]){
     
 }
 
-void caseThree(vector<string> dictionary, string &startWord, string &endWord, int numberOfWords[]){
+void caseThree(vector<string> dictionary, string &startWord, string &endWord, int numberOfWords[], int lengthOfWordsToUse){
     startWord = "dog";
     endWord = "cat"; 
+    int doLoopInt = 0;
+    
     do{
         cout << "Enter starting word, or 'r' for a random word: " ; 
    
         cin >> startWord;
-        if (startWord = 'exit'){
+        
+        if (startWord == 'exit')
+         {
         exit(-1);
-    }
-    if (startWord = 'r' ){
+         }
+        if (startWord == 'r' ){
         startWord = dictionary[rand()%dictionary.size()];
         //end condition
-    }
-    
+        }
+        else if(startWord.length() != lengthOfWordsToUse){
+            // error message
+            continue;
+        }
+        
+        else if(binarySearch(startWord, dictionary) == -1){
+            //error
+            continue;
+        }
+        doLoopInt = 1;
+        
     
     
     if (startWord.length() != 3){
         
         
     }
-
     
-        
-        
-        
-        
     }
-    while (   ); 
+    while (doLoopInt == 0); 
    
     }
+  
 
-    
-    
-    
-    
-    
-}
+
     
     
     
