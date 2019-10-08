@@ -256,6 +256,7 @@ void wordChangeGame(int lengthOfWordsToUse, string startWord, string endWord,vec
            }
            else if(previousWord == endWord){
                x = 1;
+               cout <<"Congratulations, you did it!" <<endl;
                break;
            }
            else if(nextWord == "exit"){
