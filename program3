@@ -225,24 +225,58 @@ void caseThree(vector<string> dictionary, string &startWord, string &endWord, in
 
 void wordChangeGame(int lengthOfWordsToUse, string startWord, string endWord,vector<string>dictionary)
 {
-    //counter = 0
+    string previousWord = startWord;
+    string nextWord = "";
+    string currentWord = "";
+    int counter = 0;
+    int x = 0;
     // startWord = nextWord
     // 
     
     
       if (startWord ==" " && endWord== " "){
         cout<<"*** "<< startWord <<" is not of length 3. Please retry."<<endl;
-        
+      }
         //if startword or endword = exit, return to menu  
        
+       do{
+           counter++;
+           cout << counter <<  ".  Previous word is '" << previousWord << "'.  Next word: ";
+           cin >> nextWord;
+           if(binarySearch(currentWord, dictionary) != -1){
+            currentWord = previousWord;
+            }
+           else if(binarySearch(currentWord, dictionary) == -1){
+            cout<<"*** "<< currentWord <<" is not in the dictionary. Please retry."<<endl; //error
+            continue;
+            }
+           // add second error for length
+           if(previousWord != endWord){
+               continue;
+           }
+           else if(previousWord == endWord){
+               x = 1;
+               break;
+           }
+           else if(nextWord == "exit"){
+               x = 1;
+               exit(-1);
+           }
+           
+           
+           
+           
+           
+           
+       }while(x == 0);
        
+          
         
 
         
         
     }
     
-}
 
 
  
@@ -335,6 +369,7 @@ Length  How Many
                 break;
             case 4:
                 //wordChangeGame(dictionary,startWord,endWord);
+                wordChangeGame(lengthOfWordsToUse, startWord, endWord, dictionary);
                 
                 break;
                 
