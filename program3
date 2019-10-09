@@ -38,7 +38,7 @@ void readInWordsFromFile(int lengthOfWordsToUse, vector<string> &dictionary)
     int firstIndex = 0;
     int secondIndex = 0;
     
-    cout << "What length of words do you want to use?" ;
+    cout << "Enter the start and end index values of words to display:" ;
     cin >> firstIndex;
     cin >> secondIndex;
     
@@ -444,6 +444,7 @@ Length  How Many
                 break;
                 
             case 8:
+	    	cout<<"Exiting the program" << endl;
                 exit(-1);
                 break;
         }
