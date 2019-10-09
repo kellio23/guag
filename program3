@@ -22,8 +22,8 @@ void displayIdInfo()
 {
     cout << " \n"
          << "Program #3: Work Play  \n"
-         << "Author: Dale Reed      \n"
-         << "Lab: Tues 8am          \n"
+         << "Author: Kevin Elliott, Andy Hansana      \n"
+         << "Lab: Tues 9am          \n"
          << "System:  Codio         \n"
          << " \n";
 }//end displayIDInfo()
@@ -232,7 +232,7 @@ void wordChangeGame(int lengthOfWordsToUse, string startWord, string endWord,vec
     int letterCounter = 0;
     int x = 0;
     // startWord = nextWord
-    // 
+     
     
     
       if (startWord ==" " && endWord== " "){
@@ -297,6 +297,42 @@ void wordChangeGame(int lengthOfWordsToUse, string startWord, string endWord,vec
        }while(x == 0);
       
     }
+
+
+void case5(vector<string>dictionary, string startWord, string endWord, int lengthOfWordsToUse){
+    
+    startWord = "Dog";
+    //need 3 , 2 nested int he first, for loops in total, we are brute forcing every combination of letter changes and putting them into an array, no duplicates, until end word is reached
+    //for every child we go from a-z. 
+    //one vector changes the letter by 1 and then adds it to the vector
+    
+    //pushback startword into dictuonary
+    //
+    int sub = 0; // do string.at(x) = string.at(x) 97+ sub... ascii table plus sub equals the letter
+    //dictionary.pushback(startword);
+    vector <string> tempVector;
+    tempVector.push_back(startWord);
+        
+    for(int i = 0; i < tempVector.size(); i++){
+        
+        for(int p = 0; p < lengthOfWordsToUse; p++){  //resets the word everytime, changes the number of letter from the first letter to the second   
+            
+            startWord = tempVector.at(i);
+            
+            tempVector.push_back(startWord);
+        
+        
+        for(int sub = 0; sub < 25; sub++){   //changes the letter to every of the alphabet, needs to add to a vector
+            startWord.at(i) = 97 + sub;
+            //check duplicates
+            //add to vector
+            
+        }
+        }
+    }
+    
+    
+}
     
 
 
@@ -396,6 +432,7 @@ Length  How Many
                 
             case 5:
                 cout << "Find the end word with debug " << endl;
+                case5(dictionary, startWord, endWord, lengthOfWordsToUse);
                 break;
                 
             case 6:
