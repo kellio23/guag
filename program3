@@ -299,7 +299,7 @@ void wordChangeGame(int lengthOfWordsToUse, string startWord, string endWord,vec
     }
 
 
-void case5(vector<string>dictionary, string startWord, string endWord, int lengthOfWordsToUse){
+void case5(vector<string>dictionary, string startWord, string endWord, int lengthOfWordsToUse, int caseNumber){
     string origWord = startWord;
     //need 3 , 2 nested int he first, for loops in total, we are brute forcing every combination of letter changes and putting them into an array, no duplicates, until end word is reached
     //for every child we go from a-z. 
@@ -326,7 +326,7 @@ void case5(vector<string>dictionary, string startWord, string endWord, int lengt
              break;
             }
         //origWord == startWord;
-        cout << parentCounter << ". " << tempVector.at(i) << ":  ";
+        if(caseNumber == 5) {cout << parentCounter << ". " << tempVector.at(i) << ":  ";}
         for(int p = 0; p < lengthOfWordsToUse; p++){  //resets the word everytime, changes the number of letter from the first letter to the second   
             
             startWord = tempVector.at(i);
@@ -345,7 +345,7 @@ void case5(vector<string>dictionary, string startWord, string endWord, int lengt
                         bucket.at(locationOfWord) = 1;
                         tempVector.push_back(startWord);            // if both true, add startWord to tempVector
                         childCounter++;
-                        cout << " " << childCounter << ":" << startWord;
+                        if(caseNumber == 5) {cout << " " << childCounter << ":" << startWord;}
                         
                       }
             
@@ -359,17 +359,11 @@ void case5(vector<string>dictionary, string startWord, string endWord, int lengt
                         }
         }
         parentCounter++;
-        cout << endl;
+        if(caseNumber == 5) {cout << endl;}
     }
    
-    
+    cout << endl << "Winning sequence was found!" << endl << endl;
 }
-
-//int linearSearch(string startWord, )
-/*
-  if(binarySearch(startWord, dictionary) != -1){      // check if in dictionary
-                    if(binarySearch(startWord, tempVector) == -1){
- */
 
 
  
@@ -382,6 +376,7 @@ int main()
     string endWord = "cat";             // The end word for transformation
     int menuOption = -1;                // User menu option selection
     int totalWords = 0;
+    int caseNumber;
     int numOfWords[30] = {0};
     dictionary.clear();
     int startIndex = 0;
@@ -468,11 +463,13 @@ Length  How Many
                 
             case 5:
                 //cout << "Find the end word with debug " << endl;
-                case5(dictionary, startWord, endWord, lengthOfWordsToUse);
+                caseNumber = 5;
+                case5(dictionary, startWord, endWord, lengthOfWordsToUse, caseNumber);
                 break;
                 
             case 6:
-                cout << "Find the end word " << endl;
+                caseNumber = 6;
+                case5(dictionary, startWord, endWord, lengthOfWordsToUse, caseNumber);
                 break;
                 
             case 7:
