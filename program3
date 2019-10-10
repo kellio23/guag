@@ -22,8 +22,8 @@ void displayIdInfo()
 {
     cout << " \n"
          << "Program #3: Work Play  \n"
-         << "Author: Kevin Elliott, Andy Hansana      \n"
-         << "Lab: Tues 9am          \n"
+         << "Author: Dale Reed      \n"
+         << "Lab: Tues 8am          \n"
          << "System:  Codio         \n"
          << " \n";
 }//end displayIDInfo()
@@ -150,8 +150,10 @@ void printNumOfWordsTable(int numOfWords[]){
     cout << "Word lengths where there are more than 1400 words:" << endl;
     cout << "Length  How Many" << endl;
     cout << "------  --------" << endl;
-    for (int i = 3; i < 18; i++){
-        cout << i << "  " << numOfWords[i] << endl;
+    for (int i = 0; i < 30; i++){
+        if(numOfWords[i] >= 1400){
+        cout << setw(5) << i << setw(10) <<  numOfWords[i] << endl;
+         }
     }
     
 }
