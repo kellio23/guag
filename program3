@@ -243,13 +243,13 @@ void wordChangeGame(int lengthOfWordsToUse, string startWord, string endWord,vec
     
     
       if (startWord ==" " && endWord== " "){
-        cout<<"*** "<< startWord <<" is not of length 3. Please retry."<<endl;
+        cout<<"    *** "<< startWord <<" is not of length 3. Please retry."<<endl;
       }
         //cout <<"***" << startWord << "is not in the dictionary. Please retry."<< endl;  
        
        do{
            counter++;
-           cout << counter <<  ".  Previous word is '" << previousWord << "'.  Next word: ";
+           cout <<" "<< counter <<  ". Previous word is '" << previousWord << "'.  Next word: " << endl;
            cin >> nextWord;
            
            for(int i= 0; i<lengthOfWordsToUse; i++){
@@ -270,11 +270,14 @@ void wordChangeGame(int lengthOfWordsToUse, string startWord, string endWord,vec
            }
            
            if (nextWord.length() != lengthOfWordsToUse){
-               cout << "*** " << "'" << nextWord << "'" << " is not of length " <<lengthOfWordsToUse <<  " Please retry." << endl;
+               counter--;
+               cout << "    *** " << "'" << nextWord << "'" << " is not of length " <<lengthOfWordsToUse <<  ". Please retry." << endl;
+               continue;
            }
            
-           if(letterCounter != lengthOfWordsToUse - 1){
-               cout << "*** " << "'" << nextWord << "'" << " must be exactly 1 character different.  Please retry." << endl;
+           else if(letterCounter != lengthOfWordsToUse - 1){
+               counter--;
+               cout << "    *** " << "'" << nextWord << "'" << " must be exactly 1 character different.  Please retry." << endl;
                continue;
            }
            
@@ -285,15 +288,13 @@ void wordChangeGame(int lengthOfWordsToUse, string startWord, string endWord,vec
                previousWord = nextWord;
                
             }
-           else if(nextWord.length() != lengthOfWordsToUse){
-            cout<<"*** "<< nextWord <<" is not of length 3. Please retry."<<endl;
-            continue;
-           }
+           
                
                
                
            else if(binarySearch(nextWord, dictionary) == -1){
-            cout<<"*** '" << nextWord << "' is not in the dictionary. Please retry."<<endl; //error
+            counter--;
+            cout<<"    *** '" << nextWord << "' is not in the dictionary. Please retry."<<endl; //error
             continue;
             }
            // add second error for length
