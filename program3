@@ -38,7 +38,7 @@ void readInWordsFromFile(int lengthOfWordsToUse, vector<string> &dictionary)
     int firstIndex = 0;
     int secondIndex = 0;
     
-    cout << "Enter the start and end index values of words to display:" ;
+    cout << "What length of words do you want to use?" ;
     cin >> firstIndex;
     cin >> secondIndex;
     
@@ -300,40 +300,69 @@ void wordChangeGame(int lengthOfWordsToUse, string startWord, string endWord,vec
 
 
 void case5(vector<string>dictionary, string startWord, string endWord, int lengthOfWordsToUse){
-    
-    startWord = "Dog";
+    string origWord = startWord;
     //need 3 , 2 nested int he first, for loops in total, we are brute forcing every combination of letter changes and putting them into an array, no duplicates, until end word is reached
     //for every child we go from a-z. 
     //one vector changes the letter by 1 and then adds it to the vector
     
     //pushback startword into dictuonary
-    //
+    
     int sub = 0; // do string.at(x) = string.at(x) 97+ sub... ascii table plus sub equals the letter
     //dictionary.pushback(startword);
     vector <string> tempVector;
     tempVector.push_back(startWord);
+    
+    vector <int> bucket(dictionary.size());
         
+        //need to create a check that checks the index of bucket/dictionary to ensure there is not a repeat word before adding it since the dictionary has repeats
     for(int i = 0; i < tempVector.size(); i++){
         
+        if(startWord == endWord){
+             break;
+            }
+        //origWord == startWord;
+        cout << startWord;
         for(int p = 0; p < lengthOfWordsToUse; p++){  //resets the word everytime, changes the number of letter from the first letter to the second   
             
             startWord = tempVector.at(i);
+           // origWord == startWord; this line does nothing
             
-            tempVector.push_back(startWord);
-        
-        
-        for(int sub = 0; sub < 25; sub++){   //changes the letter to every of the alphabet, needs to add to a vector
-            startWord.at(i) = 97 + sub;
-            //check duplicates
-            //add to vector
+            //tempVector.push_back(startWord);
+            for(int sub = 0; sub <= 25; sub++){   //changes the letter to every of the alphabet, needs to add to a vector
+                
+                startWord[p] = (char)(97 + sub);      //changes letter
+                long locationOfWord = binarySearch(startWord, dictionary);
+                if(origWord == startWord){bucket.at(locationOfWord) = 1;}   //check if the changed word is equal to origWord
+                
+                
+                  if((locationOfWord != -1) && (bucket.at(locationOfWord) == 0)){// cant binary search temp vector  && (binarySearch(startWord, tempVector) == -1)                 
+                      
+                        bucket.at(locationOfWord) = 1;
+                        tempVector.push_back(startWord);            // if both true, add startWord to tempVector
+                        cout << " " << startWord << " ";
+                        
+                      }
             
+                        if(startWord == endWord){    //once cat is reached, break cycle, might be not needed
+                            break;
+                        }
+                        
+        }//end 3rd for loop
+            if(startWord == endWord){    //once cat is reached, break cycle, might be not needed
+                            break;
+                        }
         }
-        }
+        cout << endl;
     }
-    
+   
     
 }
-    
+
+//int linearSearch(string startWord, )
+/*
+  if(binarySearch(startWord, dictionary) != -1){      // check if in dictionary
+                    if(binarySearch(startWord, tempVector) == -1){
+ */
 
 
  
@@ -431,7 +460,7 @@ Length  How Many
                 break;
                 
             case 5:
-                cout << "Find the end word with debug " << endl;
+                //cout << "Find the end word with debug " << endl;
                 case5(dictionary, startWord, endWord, lengthOfWordsToUse);
                 break;
                 
@@ -444,7 +473,6 @@ Length  How Many
                 break;
                 
             case 8:
-	    	cout<<"Exiting the program" << endl;
                 exit(-1);
                 break;
         }
