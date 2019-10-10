@@ -326,7 +326,7 @@ void case5(vector<string>dictionary, string startWord, string endWord, int lengt
              break;
             }
         //origWord == startWord;
-        cout << parentCounter << tempVector.at(i);
+        cout << parentCounter << ". " << tempVector.at(i) << ":  ";
         for(int p = 0; p < lengthOfWordsToUse; p++){  //resets the word everytime, changes the number of letter from the first letter to the second   
             
             startWord = tempVector.at(i);
@@ -345,7 +345,7 @@ void case5(vector<string>dictionary, string startWord, string endWord, int lengt
                         bucket.at(locationOfWord) = 1;
                         tempVector.push_back(startWord);            // if both true, add startWord to tempVector
                         childCounter++;
-                        cout << " " << childCounter << startWord << " ";
+                        cout << " " << childCounter << ":" << startWord;
                         
                       }
             
