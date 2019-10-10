@@ -311,10 +311,53 @@ void wordChangeGame(int lengthOfWordsToUse, string startWord, string endWord,vec
       
     }
 
+int getChildIndex(string child, vector <string> tempVector){
+    for(int x = 0; x < tempVector.size()-1; x++){
+        if(tempVector.at(x) == child){
+            return x;
+        }
+    }
+}
+
+void case7(string endWord, string startWord, string origWord, vector <string> tempVector, vector <string> parentVector){ // child word, startWord, endWord, parent?, tempVector. parentVector
+  
+    string child = endWord;
+    //cout << child;
+    string parent;
+    
+    while(child != origWord){
+        for(int i = 0; i < tempVector.size()-1; i--){
+            
+            int x = getChildIndex(child, tempVector);
+            //child = tempVector.at(x); // tempV?  //cat
+            cout << child;
+            parent = parentVector.at(x); // cog
+            cout << parent;
+            child = parent;
+        }
+    }
+    
+   /* 
+    string word = endWord;
+    for(int o = tempVector.size()-1; o > 0; o--){
+        word = tempVector.at(i); int index;
+        for(j = o - 1; j > 0; j--){
+            if(difference((word,tempVector.at(j)) == 1)){
+                index = j;
+            }
+        }
+        i = index;
+        
+    }
+    */
+}
+
+
 
 void case5(vector<string>dictionary, string startWord, string endWord, int lengthOfWordsToUse, int caseNumber, vector<int> &winningSequence){
     string origWord = startWord;
     vector <string> parentVector;
+    
     
     int parentCounter = 0;
     int childCounter = 0;
@@ -350,6 +393,7 @@ void case5(vector<string>dictionary, string startWord, string endWord, int lengt
                         bucket.at(locationOfWord) = 1;
                         tempVector.push_back(startWord);            // if both true, add startWord to tempVector
                         parentVector.push_back(tempVector[i]);
+                      
                         childCounter++;
                         if(caseNumber == 5) {cout << " " << childCounter << ":" << startWord;}
                         
@@ -370,21 +414,12 @@ void case5(vector<string>dictionary, string startWord, string endWord, int lengt
    
     cout << endl << "Winning sequence was found!" << endl << endl;
     
-    for(int o = tempVector.size()-1; o > 0; o--){
-        word = vector.at(i); int index;
-        for(j = o - 1; j > 0; j--){
-            if(difference((word,vector.at(j)) == 1)){
-                index = j;
-            }
-        }
-        i = index;
-    }
+    case7(endWord, startWord, origWord, tempVector, parentVector);
     
 }
 
-void case7(){
-    
-}
+
+
 
 
  
@@ -483,6 +518,7 @@ int main()
                 
             case 7:
                 cout << "Display an answer sequence " << endl;
+               
                 break;
                 
             case 8:
