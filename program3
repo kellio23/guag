@@ -326,7 +326,7 @@ void case7(string endWord, string startWord, string origWord, vector <string> te
     string parent;
     
     while(child != origWord){
-        for(int i = 0; i < tempVector.size()-1; i--){
+        for(int i = tempVector.size(); i > 0; i--){
             
             int x = getChildIndex(child, tempVector);
             //child = tempVector.at(x); // tempV?  //cat
@@ -334,6 +334,9 @@ void case7(string endWord, string startWord, string origWord, vector <string> te
             parent = parentVector.at(x); // cog
             cout << parent;
             child = parent;
+            if(child == origWord){
+                break;
+            }
         }
     }
     
@@ -378,7 +381,6 @@ void case5(vector<string>dictionary, string startWord, string endWord, int lengt
         for(int p = 0; p < lengthOfWordsToUse; p++){  //resets the word everytime, changes the number of letter from the first letter to the second   
             
             startWord = tempVector.at(i);
-           // origWord == startWord; this line does nothing
             
             //tempVector.push_back(startWord);
             for(int sub = 0; sub <= 25; sub++){   //changes the letter to every of the alphabet, needs to add to a vector
@@ -413,6 +415,14 @@ void case5(vector<string>dictionary, string startWord, string endWord, int lengt
     }
    
     cout << endl << "Winning sequence was found!" << endl << endl;
+    
+   // for(int i = 0; i< parentVector.size()-1; i++){
+ //       cout<< parentVector[i];
+      
+ //   }
+  //    cout << endl <<endl;
+    
+
     
     case7(endWord, startWord, origWord, tempVector, parentVector);
     
