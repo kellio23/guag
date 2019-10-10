@@ -312,27 +312,19 @@ void wordChangeGame(int lengthOfWordsToUse, string startWord, string endWord,vec
     }
 
 
-void case5(vector<string>dictionary, string startWord, string endWord, int lengthOfWordsToUse, int caseNumber){
+void case5(vector<string>dictionary, string startWord, string endWord, int lengthOfWordsToUse, int caseNumber, vector<int> &winningSequence){
     string origWord = startWord;
-    //need 3 , 2 nested int he first, for loops in total, we are brute forcing every combination of letter changes and putting them into an array, no duplicates, until end word is reached
-    //for every child we go from a-z. 
-    //one vector changes the letter by 1 and then adds it to the vector
+    vector <string> parentVector;
     
-    //pushback startword into dictuonary
     int parentCounter = 0;
     int childCounter = 0;
     int sub = 0; // do string.at(x) = string.at(x) 97+ sub... ascii table plus sub equals the letter
-    //dictionary.pushback(startword);
+    
     vector <string> tempVector;
     tempVector.push_back(startWord);
     
     vector <int> bucket(dictionary.size());
-        
-        //need to create a check that checks the index of bucket/dictionary to ensure there is not a repeat word before adding it since the dictionary has repeats
-        //
 
-        
-        
     for(int i = 0; i < tempVector.size(); i++){
         
         if(startWord == endWord){
@@ -357,6 +349,7 @@ void case5(vector<string>dictionary, string startWord, string endWord, int lengt
                                                                                                                
                         bucket.at(locationOfWord) = 1;
                         tempVector.push_back(startWord);            // if both true, add startWord to tempVector
+                        parentVector.push_back(tempVector[i]);
                         childCounter++;
                         if(caseNumber == 5) {cout << " " << childCounter << ":" << startWord;}
                         
@@ -376,6 +369,15 @@ void case5(vector<string>dictionary, string startWord, string endWord, int lengt
     }
    
     cout << endl << "Winning sequence was found!" << endl << endl;
+    
+    for(int o = tempVector.size()-1; o > 0; o--){
+        
+    }
+    
+}
+
+void case7(){
+    
 }
 
 
@@ -392,6 +394,7 @@ int main()
     int caseNumber;
     int numOfWords[30] = {0};
     dictionary.clear();
+    vector <int> winningSequence;
     int startIndex = 0;
     int endIndex = 0; // array of size 30, each index is the number of words, index 0 is word length 1
     int startingWord = 0;
@@ -450,32 +453,26 @@ int main()
                 break;
                 
             case 2:
-               readInWordsFromFile(lengthOfWordsToUse, dictionary);
-
-                
-             
+                readInWordsFromFile(lengthOfWordsToUse, dictionary);
                 break;
                 
             case 3:
                 caseThree(dictionary,startWord,endWord,numOfWords,lengthOfWordsToUse);
-                
-                
                 break;
             case 4:
                 //wordChangeGame(dictionary,startWord,endWord);
                 wordChangeGame(lengthOfWordsToUse, startWord, endWord, dictionary);
-                
                 break;
                 
             case 5:
                 //cout << "Find the end word with debug " << endl;
                 caseNumber = 5;
-                case5(dictionary, startWord, endWord, lengthOfWordsToUse, caseNumber);
+                case5(dictionary, startWord, endWord, lengthOfWordsToUse, caseNumber, winningSequence);
                 break;
                 
             case 6:
                 caseNumber = 6;
-                case5(dictionary, startWord, endWord, lengthOfWordsToUse, caseNumber);
+                case5(dictionary, startWord, endWord, lengthOfWordsToUse, caseNumber, winningSequence);
                 break;
                 
             case 7:
