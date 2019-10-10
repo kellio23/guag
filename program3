@@ -306,7 +306,8 @@ void case5(vector<string>dictionary, string startWord, string endWord, int lengt
     //one vector changes the letter by 1 and then adds it to the vector
     
     //pushback startword into dictuonary
-    
+    int parentCounter = 0;
+    int childCounter = 0;
     int sub = 0; // do string.at(x) = string.at(x) 97+ sub... ascii table plus sub equals the letter
     //dictionary.pushback(startword);
     vector <string> tempVector;
@@ -315,13 +316,17 @@ void case5(vector<string>dictionary, string startWord, string endWord, int lengt
     vector <int> bucket(dictionary.size());
         
         //need to create a check that checks the index of bucket/dictionary to ensure there is not a repeat word before adding it since the dictionary has repeats
+        //
+
+        
+        
     for(int i = 0; i < tempVector.size(); i++){
         
         if(startWord == endWord){
              break;
             }
         //origWord == startWord;
-        cout << startWord;
+        cout << parentCounter << tempVector.at(i);
         for(int p = 0; p < lengthOfWordsToUse; p++){  //resets the word everytime, changes the number of letter from the first letter to the second   
             
             startWord = tempVector.at(i);
@@ -335,11 +340,12 @@ void case5(vector<string>dictionary, string startWord, string endWord, int lengt
                 if(origWord == startWord){bucket.at(locationOfWord) = 1;}   //check if the changed word is equal to origWord
                 
                 
-                  if((locationOfWord != -1) && (bucket.at(locationOfWord) == 0)){// cant binary search temp vector  && (binarySearch(startWord, tempVector) == -1)                 
-                      
+                  if((locationOfWord != -1) && (bucket.at(locationOfWord) == 0) && ((locationOfWord != 0) || (dictionary.at(locationOfWord - 1) != dictionary.at(locationOfWord)))){// cant binary search temp vector  && (binarySearch(startWord, tempVector) == -1)                 
+                                                                                                               
                         bucket.at(locationOfWord) = 1;
                         tempVector.push_back(startWord);            // if both true, add startWord to tempVector
-                        cout << " " << startWord << " ";
+                        childCounter++;
+                        cout << " " << childCounter << startWord << " ";
                         
                       }
             
@@ -352,6 +358,7 @@ void case5(vector<string>dictionary, string startWord, string endWord, int lengt
                             break;
                         }
         }
+        parentCounter++;
         cout << endl;
     }
    
