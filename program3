@@ -371,7 +371,13 @@ void case5(vector<string>dictionary, string startWord, string endWord, int lengt
     cout << endl << "Winning sequence was found!" << endl << endl;
     
     for(int o = tempVector.size()-1; o > 0; o--){
-        
+        word = vector.at(i); int index;
+        for(j = o - 1; j > 0; j--){
+            if(difference((word,vector.at(j)) == 1)){
+                index = j;
+            }
+        }
+        i = index;
     }
     
 }
