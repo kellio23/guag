@@ -38,15 +38,17 @@ void readInWordsFromFile(int lengthOfWordsToUse, vector<string> &dictionary)
     int firstIndex = 0;
     int secondIndex = 0;
     
-    cout << "What length of words do you want to use?" ;
+    cout << "Enter the start and end index values of words to display:" ;
     cin >> firstIndex;
     cin >> secondIndex;
-    
+    cout << endl << "About to display dictionary words from " << firstIndex << " to " << secondIndex << endl; 
+
     int startIndex = 0;
     
     for(int i = firstIndex; i <= secondIndex; i++){
         cout << setw(5) << i << " " << dictionary[i] << endl;
     }
+    
     cout << endl;
     }
 
@@ -142,6 +144,7 @@ void dictChecker(int lengthOfWordsToUse, vector<string> &dictionary, int numOfWo
         }
         numOfWords[inputWord.length()]++; 
     }
+    
 
     inputFileStream.close();    // Close the input file.
 }
@@ -155,7 +158,7 @@ void printNumOfWordsTable(int numOfWords[]){
         cout << setw(5) << i << setw(10) <<  numOfWords[i] << endl;
          }
     }
-    
+    cout << endl;
 }
 
 void caseThree(vector<string> dictionary, string &startWord, string &endWord, int numberOfWords[], int lengthOfWordsToUse){
@@ -164,13 +167,15 @@ void caseThree(vector<string> dictionary, string &startWord, string &endWord, in
     int doLoopInt = 0;
     
     do{
-        cout << "Enter starting word, or 'r' for a random word: " ; 
+        cout << "Enter starting word, or 'r' for a random word: " << endl;
    
         cin >> startWord; 
+        cout << endl;
         
         
         if (startWord == "exit")
          {
+        cout <<"Exiting program." << endl;
         exit(-1);
          }
         if (startWord == "r" ){
@@ -178,12 +183,12 @@ void caseThree(vector<string> dictionary, string &startWord, string &endWord, in
         //end condition
         }
         else if(startWord.length() != lengthOfWordsToUse){
-            cout<<"*** "<< startWord <<" is not of length 3. Please retry."<<endl;
+            cout<<"*** '"<< startWord <<"' is not of length 3. Please retry."<<endl;
             continue;
         }
         
         else if(binarySearch(startWord, dictionary) == -1){
-            cout<<"***"<< startWord <<" is not in the dictionary. Please retry."<<endl;//error
+            cout<<"*** '"<< startWord <<"' is not in the dictionary. Please retry."<<endl;//error
             continue;
         }
    
@@ -194,7 +199,7 @@ void caseThree(vector<string> dictionary, string &startWord, string &endWord, in
     }
     while (doLoopInt == 0); 
     do{
-        cout << "Enter starting word, or 'r' for a random word: " ; 
+        cout << "Enter ending word, or 'r' for a random word: " ; 
    
         cin >> endWord; 
         
@@ -208,13 +213,13 @@ void caseThree(vector<string> dictionary, string &startWord, string &endWord, in
      }
         
          else if(endWord.length() != lengthOfWordsToUse){
-            cout<<"*** " << endWord << " is not of length 3. Please retry."<<endl;
+            cout<<"*** '" << endWord << "' is not of length 3. Please retry."<< endl <<endl;
             continue;
             
             
         }
         else if(binarySearch(endWord, dictionary) == -1){
-            cout<<"*** "<< endWord <<" is not in the dictionary. Please retry."<<endl; //error
+            cout<<"*** '"<< endWord <<"' is not in the dictionary. Please retry."<< endl <<endl; //error
             continue;
         }
         doLoopInt = 1;
@@ -263,6 +268,11 @@ void wordChangeGame(int lengthOfWordsToUse, string startWord, string endWord,vec
                }
                
            }
+           
+           if (nextWord.length() != lengthOfWordsToUse){
+               cout << "*** " << "'" << nextWord << "'" << " is not of length " <<lengthOfWordsToUse <<  " Please retry." << endl;
+           }
+           
            if(letterCounter != lengthOfWordsToUse - 1){
                cout << "*** " << "'" << nextWord << "'" << " must be exactly 1 character different.  Please retry." << endl;
                continue;
@@ -386,12 +396,16 @@ int main()
     int startingWord = 0;
     dictChecker(lengthOfWordsToUse, dictionary, numOfWords, totalWords);
     
-    printNumOfWordsTable(numOfWords);
 
     //readInWordsFromFile(lengthOfWordsToUse, dictionary);
 
     // Display ID info
     displayIdInfo();
+    
+    cout << "Total number of words in dictionary file: 235886" << endl << endl;
+    
+    printNumOfWordsTable(numOfWords);
+
     
     
     
@@ -400,30 +414,12 @@ int main()
 
     // Menu display and handling infinite loop
     do {
-      /* cout <<"Word lengths where there are more than 1400 words:
-Length  How Many
-------  --------
-    3      1420
-    4      5272
-    5     10230
-    6     17706
-    7     23869
-    8     29989
-    9     32403
-   10     30878
-   11     26013
-   12     20462
-   13     14939
-   14      9765
-   15      5925
-   16      3377
-   17      1813*/
-        
-        
+ 
+       
         
         cout << "Currently we have " << dictionary.size() << " words of length "
              << lengthOfWordsToUse << " in the dictionary.  \n"
-             << "Changing from '" << startWord << "' to '" << endWord << "'" << endl
+             << "Changing from '" <<startWord << "' to '" << endWord<< "'" << endl
              << endl;
         
         cout << "Choose from the following options:  \n"
@@ -435,20 +431,27 @@ Length  How Many
              << "   6. Find the end word             \n"
              << "   7. Display an answer sequence    \n"
              << "   8. Exit the program              \n"
-             << "Your choice -> ";
+             << "Your choice -> " << endl << endl;
+           
+        
        cin >> menuOption;
         
         
         switch(menuOption){
             case 1:
-                cout << "What length of words do you want to use? " << endl;
-		cin >> lengthOfWordsToUse;
-		dictChecker(lengthOfWordsToUse, dictionary, numOfWords, totalWords);  //we have numOfWords[] getting filled but we have not printed it yet
+                
+                cout << "What length words do you want to use? ";
+                cin >> lengthOfWordsToUse;
+                dictChecker(lengthOfWordsToUse, dictionary, numOfWords, totalWords);   //we have numOfWords[] getting filled but we have not printed it yet               
+                startWord = "";
+                endWord = "";            
+                
                 break;
                 
             case 2:
-                
                readInWordsFromFile(lengthOfWordsToUse, dictionary);
+
+                
              
                 break;
                 
@@ -479,6 +482,7 @@ Length  How Many
                 break;
                 
             case 8:
+                cout << endl << endl << "Exiting the program";
                 exit(-1);
                 break;
         }
