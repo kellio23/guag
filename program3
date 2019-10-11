@@ -312,27 +312,33 @@ void wordChangeGame(int lengthOfWordsToUse, string startWord, string endWord,vec
     }
 
 int getChildIndex(string child, vector <string> tempVector){
-    for(int x = 0; x < tempVector.size()-1; x++){
-        if(tempVector.at(x) == child){
+    
+    
+    for(int x = 0; x < tempVector.size(); x++){
+        if(child == tempVector.at(x)){
             return x;
         }
+        
     }
+   
 }
 
-void case7(string endWord, string startWord, string origWord, vector <string> tempVector, vector <string> parentVector){ // child word, startWord, endWord, parent?, tempVector. parentVector
+void case7(string endWord, string startWord, string origWord, vector <string> tempVector, vector <string> parentVector, vector <int> parentIndex){ // child word, startWord, endWord, parent?, tempVector. parentVector
   
     string child = endWord;
-    //cout << child;
     string parent;
-    
+  
     while(child != origWord){
         for(int i = tempVector.size(); i > 0; i--){
-            
             int x = getChildIndex(child, tempVector);
+            //cout << " tempV test = " << tempVector.at(344) << endl;
             //child = tempVector.at(x); // tempV?  //cat
-            cout << child;
-            parent = parentVector.at(x); // cog
-            cout << parent;
+            //cout << child << endl;
+            parent = parentVector.at(x-1); // cog
+            //cout << " parent vector at x is " << parentVector.at(x);
+            //cout << " and " << parentIndex.at(x) << endl;
+          //  cout << "parentVector at x = " << parentVector.at(x) << endl;
+            cout << parent << endl;
             child = parent;
             if(child == origWord){
                 break;
@@ -360,6 +366,8 @@ void case7(string endWord, string startWord, string origWord, vector <string> te
 void case5(vector<string>dictionary, string startWord, string endWord, int lengthOfWordsToUse, int caseNumber, vector<int> &winningSequence){
     string origWord = startWord;
     vector <string> parentVector;
+    vector <int> parentIndex;
+    string parentWord5;
     
     
     int parentCounter = 0;
@@ -394,7 +402,9 @@ void case5(vector<string>dictionary, string startWord, string endWord, int lengt
                                                                                                                
                         bucket.at(locationOfWord) = 1;
                         tempVector.push_back(startWord);            // if both true, add startWord to tempVector
-                        parentVector.push_back(tempVector[i]);
+                        parentVector.push_back(tempVector[i]); // tempvector[]i
+                        parentIndex.push_back(parentCounter);
+                        //cout << " in case 5 push back test " << startWord << "<- startword " << tempVector[i] << "tempvector[i] " << endl;
                       
                         childCounter++;
                         if(caseNumber == 5) {cout << " " << childCounter << ":" << startWord;}
@@ -416,15 +426,38 @@ void case5(vector<string>dictionary, string startWord, string endWord, int lengt
    
     cout << endl << "Winning sequence was found!" << endl << endl;
     
-   // for(int i = 0; i< parentVector.size()-1; i++){
- //       cout<< parentVector[i];
-      
- //   }
-  //    cout << endl <<endl;
+    //parentVector.push_back(startWord);
     
 
+//   for(int i = 0; i< parentVector.size(); i++){
+ //       cout<< setw(3) << tempVector[i] << setw(7) << parentVector[i] << endl;
+      
+//    }
+ //     cout << endl <<endl;
     
-    case7(endWord, startWord, origWord, tempVector, parentVector);
+    
+  // cout << tempVector[344] << " Parents is ... " << parentVector[344];
+   // 
+   
+    cout << " " << endWord << " " << endl;
+    case7(endWord, startWord, origWord, tempVector, parentVector, parentIndex);
+    /*
+    cout << "Elements inside parentVector is: " << endl;
+    for (int i = 0; i< parentVector.size(); i++){
+        cout << parentVector.at(i) << endl;
+    }
+    cout << "Elements inside tempVector is: " << endl;
+    for(int i =0; i< tempVector.size(); i++){
+        cout << tempVector.at(i) << endl;
+    }
+    */
+    
+    //for(int i = 0; i < parentIndex.size();i++){
+    //    cout<< "The parent for " << i << "is " << parentIndex.at(i) << endl;
+        //cout<< "The parent for " << tempVector.at(i) << "is " << parentVector.at(parentIndex.at(i)) << endl;
+     //   cout << endl;
+    //}
+    
     
 }
 
