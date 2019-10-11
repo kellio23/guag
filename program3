@@ -332,13 +332,9 @@ void case7(string endWord, string startWord, string origWord, vector <string> te
     while(child != origWord){
         for(int i = tempVector.size(); i > 0; i--){
             int x = getChildIndex(child, tempVector);
-            //cout << " tempV test = " << tempVector.at(344) << endl;
-            //child = tempVector.at(x); // tempV?  //cat
-            //cout << child << endl;
+            
             parent = parentVector.at(x-1); // cog
-            //cout << " parent vector at x is " << parentVector.at(x);
-            //cout << " and " << parentIndex.at(x) << endl;
-          //  cout << "parentVector at x = " << parentVector.at(x) << endl;
+            
             cout << setw(5) << parentIndex.at(x-1) << ". " << parent << endl;
             child = parent;
             if(child == origWord){
@@ -347,24 +343,11 @@ void case7(string endWord, string startWord, string origWord, vector <string> te
         }
     }
     
-   /* 
-    string word = endWord;
-    for(int o = tempVector.size()-1; o > 0; o--){
-        word = tempVector.at(i); int index;
-        for(j = o - 1; j > 0; j--){
-            if(difference((word,tempVector.at(j)) == 1)){
-                index = j;
-            }
-        }
-        i = index;
-        
-    }
-    */
 }
 
 
 
-void case5(vector<string>dictionary, string startWord, string endWord, int lengthOfWordsToUse, int caseNumber, vector<int> &winningSequence){
+void case5(vector<string>dictionary, string startWord, string endWord, int lengthOfWordsToUse, int caseNumber, vector<int> &winningSequence, bool case7bool){
     string origWord = startWord;
     vector <string> parentVector;
     vector <int> parentIndex;
@@ -425,39 +408,11 @@ void case5(vector<string>dictionary, string startWord, string endWord, int lengt
         if(caseNumber == 5) {cout << endl;}
     }
    
-    cout << endl << "Winning sequence was found!" << endl << endl;
+    if (caseNumber == 5 || caseNumber == 6){cout << endl << "Winning sequence was found!" << endl << endl;}
     
-    //parentVector.push_back(startWord);
-    
-
-//   for(int i = 0; i< parentVector.size(); i++){
- //       cout<< setw(3) << tempVector[i] << setw(7) << parentVector[i] << endl;
-      
-//    }
- //     cout << endl <<endl;
-    
-    
-  // cout << tempVector[344] << " Parents is ... " << parentVector[344];
-   // 
    
-    //cout << " " << endWord << " " << endl;
-    case7(endWord, startWord, origWord, tempVector, parentVector, parentIndex);
-    /*
-    cout << "Elements inside parentVector is: " << endl;
-    for (int i = 0; i< parentVector.size(); i++){
-        cout << parentVector.at(i) << endl;
-    }
-    cout << "Elements inside tempVector is: " << endl;
-    for(int i =0; i< tempVector.size(); i++){
-        cout << tempVector.at(i) << endl;
-    }
-    */
-    
-    //for(int i = 0; i < parentIndex.size();i++){
-    //    cout<< "The parent for " << i << "is " << parentIndex.at(i) << endl;
-        //cout<< "The parent for " << tempVector.at(i) << "is " << parentVector.at(parentIndex.at(i)) << endl;
-     //   cout << endl;
-    //}
+    if (case7bool == true){case7(endWord, startWord, origWord, tempVector, parentVector, parentIndex);}
+   
     
     
 }
@@ -479,6 +434,7 @@ int main()
     int caseNumber;
     int numOfWords[30] = {0};
     dictionary.clear();
+    bool case7bool = false;
     vector <int> winningSequence;
     int startIndex = 0;
     int endIndex = 0; // array of size 30, each index is the number of words, index 0 is word length 1
@@ -552,17 +508,19 @@ int main()
             case 5:
                 //cout << "Find the end word with debug " << endl;
                 caseNumber = 5;
-                case5(dictionary, startWord, endWord, lengthOfWordsToUse, caseNumber, winningSequence);
+                case5(dictionary, startWord, endWord, lengthOfWordsToUse, caseNumber, winningSequence, case7bool);
                 break;
                 
             case 6:
                 caseNumber = 6;
-                case5(dictionary, startWord, endWord, lengthOfWordsToUse, caseNumber, winningSequence);
+                case5(dictionary, startWord, endWord, lengthOfWordsToUse, caseNumber, winningSequence, case7bool);
                 break;
                 
             case 7:
-                cout << "Display an answer sequence " << endl;
-               
+                case7bool = true;
+                caseNumber = 7;
+                cout << "Winning sequence in reverse order is:" << endl;
+                case5(dictionary, startWord, endWord, lengthOfWordsToUse, caseNumber, winningSequence, case7bool);
                 break;
                 
             case 8:
