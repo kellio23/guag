@@ -89,9 +89,9 @@ long binarySearch(
 void dictChecker(int lengthOfWordsToUse, vector<string> &dictionary, int numOfWords[], int &totalWords)
 {
 	ifstream inputFileStream;
-	dictionary.clear();
+	dictionary.clear();     // stops numbers from stacking up
 	
-    for(int i = 0; i < 30; i++){
+    for(int i = 0; i < 30; i++){ //fills in the table of how many words for each length
         numOfWords[i] = 0;
     }
     string fileName = "dictionary.txt"; // C string (array of char) to store filename
@@ -105,22 +105,23 @@ void dictChecker(int lengthOfWordsToUse, vector<string> &dictionary, int numOfWo
         cout << "Could not find input file " << fileName << "  Exiting..." << endl;
         exit( -1);
     }
-
+    
 	// Read all the words from the file, and display them
      while( inputFileStream >> inputWord) {
     	 if (inputWord.length() == lengthOfWordsToUse){
             for(int i = 0; i < inputWord.length(); i++){
-                inputWord[i] = tolower(inputWord[i]);
+                inputWord[i] = tolower(inputWord[i]); //ensures that all words are converted to lower case so ascii values dont conflict
             }
-             dictionary.push_back(inputWord);
+             dictionary.push_back(inputWord); // puts word in dictionary
         }
-        numOfWords[inputWord.length()]++; 
+        numOfWords[inputWord.length()]++; // add counter of words in total
     }
     
-    inputFileStream.close();    // Close the input file.
+     inputFileStream.close();    // Close the input file.
 }
-void printNumOfWordsTable(int numOfWords[]){
-    
+
+
+void printNumOfWordsTable(int numOfWords[]){     // this function displays the table of all the amount of words with the correct spacing due to setw
     cout << "Word lengths where there are more than 1400 words:" << endl;
     cout << "Length  How Many" << endl;
     cout << "------  --------" << endl;
@@ -130,45 +131,46 @@ void printNumOfWordsTable(int numOfWords[]){
          }
     }
     cout << endl;
-}
+} // end printNumOfWordsTable
+
 
 void caseThree(vector<string> dictionary, string &startWord, string &endWord, int numberOfWords[], int lengthOfWordsToUse){
-    startWord = "dog";
+    startWord = "dog"; // default words
     endWord = "cat"; 
     int doLoopInt = 0;
     
     do{
         cout << "Enter starting word, or 'r' for a random word: " << endl;
    
-        cin >> startWord; 
+        cin >> startWord; //take in user input
         cout << endl;
         
         
-        if (startWord == "exit")
+        if (startWord == "exit") // case for user wanting to exit
          {
         cout <<"Exiting program." << endl;
         exit(-1);
          }
         if (startWord == "r" ){
-        startWord = dictionary[rand()%dictionary.size()];
+        startWord = dictionary[rand()%dictionary.size()]; // assigns a random word
         //end condition
         }
-        else if(startWord.length() != lengthOfWordsToUse){
+        else if(startWord.length() != lengthOfWordsToUse){ // ex: if length of word isnt 3 when lengthOfWordsToUse, error
             cout<<"*** '"<< startWord <<"' is not of length 3. Please retry."<<endl;
             continue;
         }
         
-        else if(binarySearch(startWord, dictionary) == -1){
+        else if(binarySearch(startWord, dictionary) == -1){ // if not in dictionary
             cout<<"*** '"<< startWord <<"' is not in the dictionary. Please retry."<<endl;//error
             continue;
         }
    
-        doLoopInt = 1;
+        doLoopInt = 1; // exit loop
            
     }
-    while (doLoopInt == 0); 
+    while (doLoopInt == 0);  // similar loop but with the endWord
     do{
-        cout << "Enter ending word, or 'r' for a random word: " ; 
+        cout << "Enter ending word, or 'r' for a random word: "; 
    
         cin >> endWord; 
         
@@ -194,56 +196,50 @@ void caseThree(vector<string> dictionary, string &startWord, string &endWord, in
           
     }
     while (doLoopInt == 0); 
-   
-}
+} // end caseThree
+
 
 void wordChangeGame(int lengthOfWordsToUse, string startWord, string endWord,vector<string>dictionary)
 {
     string previousWord = startWord;
-    string nextWord = "";
+    string nextWord = ""; // both if these are initialzed to an empty string at first to avoid errors
     string currentWord = "";
-    int counter = 0;
-    int letterCounter = 0;
-    int x = 0;
+    int counter = 0; // turn counter
+    int letterCounter = 0; // used later to count similar letters
+    int x = 0; // do loop condition
    
-      if (startWord ==" " && endWord== " "){
+      if (startWord ==" " && endWord== " "){ // cant be empty to play the game
         cout<<"    *** "<< startWord <<" is not of length 3. Please retry."<<endl;
       }
        
        do{
-           counter++;
+           counter++; // turn counter++
            cout <<" "<< counter <<  ". Previous word is '" << previousWord << "'.  Next word: " << endl;
            cin >> nextWord;
-           
-           for(int i= 0; i<lengthOfWordsToUse; i++){
-               
-           }
         
            if(nextWord == "exit"){
                break;
            } 
            //forLoop
            letterCounter = 0;
-           for(int i = 0; i < lengthOfWordsToUse; i++){
+           for(int i = 0; i < lengthOfWordsToUse; i++){     //if a letter at a positon is the same as before, letterCounter++; this should be 1 less than lengthOfWordsToUse at the end. which implies its only 1 letter changed
                if(nextWord.at(i) == previousWord.at(i)){
                    letterCounter++;
                }
-               
            }
-           
-           if (nextWord.length() != lengthOfWordsToUse){
-               counter--;
+           if (nextWord.length() != lengthOfWordsToUse){ // needs to be the same length
+               counter--;  // error means turn stays the same
                cout << "    *** " << "'" << nextWord << "'" << " is not of length " <<lengthOfWordsToUse <<  ". Please retry." << endl;
                continue;
            }
            
-           else if(letterCounter != lengthOfWordsToUse - 1){
+           else if(letterCounter != lengthOfWordsToUse - 1){ // not a one letter difference
                counter--;
                cout << "    *** " << "'" << nextWord << "'" << " must be exactly 1 character different.  Please retry." << endl;
                continue;
            }
            
-            if(binarySearch(nextWord, dictionary) != -1){
+            if(binarySearch(nextWord, dictionary) != -1){ // checks if the word is in the dictionary
                previousWord = nextWord;
                
             }
@@ -253,7 +249,6 @@ void wordChangeGame(int lengthOfWordsToUse, string startWord, string endWord,vec
             cout<<"    *** '" << nextWord << "' is not in the dictionary. Please retry."<<endl; //error
             continue;
             }
-           // add second error for length
            if(previousWord != endWord){
                continue;
            }
@@ -265,83 +260,76 @@ void wordChangeGame(int lengthOfWordsToUse, string startWord, string endWord,vec
        
        }while(x == 0);
       
-    }
+    } // end wordChangeGame
+
 
 int getChildIndex(string child, vector <string> tempVector){
-  
-    for(int x = 0; x < tempVector.size(); x++){
+    for(int x = 0; x < tempVector.size(); x++){   // loops through vector, if the word is the same as the vector, return x. which is its index
         if(child == tempVector.at(x)){
             return x;
         }       
     }
-   
 }
 
 void case7(string endWord, string startWord, string origWord, vector <string> tempVector, vector <string> parentVector, vector <int> parentIndex){ // child word, startWord, endWord, parent?, tempVector. parentVector
   
-    string child = endWord;
-    string parent;
-    int z = tempVector.size()-1;
+    string child = endWord; // start in revers so the first child is the endword ex: cat
+    string parent;  // initialize the parent string
+    int z = tempVector.size()-1; // used for printing the first child
     cout << setw(5) << z << ". " << child << endl;
-    while(child != origWord){
-        for(int i = tempVector.size(); i > 0; i--){
-            int x = getChildIndex(child, tempVector);
+    while(child != origWord){                             // once the start word is reached we end the loop
+        for(int i = tempVector.size(); i > 0; i--){       // start at the end of tempVector and go to 0
+            int x = getChildIndex(child, tempVector);     // find the index of the child word and then assign x to it
             
-            parent = parentVector.at(x-1); // cog
+            parent = parentVector.at(x-1); // cog         // x-1 so we stay in bounds
             
-            cout << setw(5) << parentIndex.at(x-1) << ". " << parent << endl;
-            child = parent;
-            if(child == origWord){
+            cout << setw(5) << parentIndex.at(x-1) << ". " << parent << endl; // print the index the parent is at and then the parent word
+            child = parent;             // sets the child to the parent so we can repeat the process and "go up the ladder" of parents
+            if(child == origWord){      // once we reach the end break 
                 break;
-            }
-        }
-    }
-    
-}
+            } 
+        } // end for
+    } // end while
+} //end case7
 
-void case5(vector<string>dictionary, string startWord, string endWord, int lengthOfWordsToUse, int caseNumber, vector<int> &winningSequence, bool case7bool){
-    string origWord = startWord;
-    vector <string> parentVector;
-    vector <int> parentIndex;
-    string parentWord5;
-      
-    int parentCounter = 0;
-    int childCounter = 0;
-    int sub = 0; // do string.at(x) = string.at(x) 97+ sub... ascii table plus sub equals the letter
-    
-    vector <string> tempVector;
-    tempVector.push_back(startWord);
-    
-    vector <int> bucket(dictionary.size());
 
-    for(int i = 0; i < tempVector.size(); i++){
+void case5(vector<string>dictionary, string startWord, string endWord, int lengthOfWordsToUse, int caseNumber, vector<int> &winningSequence){
+    string origWord = startWord;  // an extra string to keep track of the original word since we change start word in the process
+    vector <string> parentVector; // keeps track of the parents of the child words
+    vector <int> parentIndex;     // keeps track of what index in the vector each parent word is
+    int parentCounter = 0;        // used for outputting the correct parent number in case 5 
+    int childCounter = 0;         // same but for child words
+    int sub = 0; // sub is how we go through the alphabet and change the letters
+    
+    vector <string> tempVector;       // this is where we will store all of the words we make 
+    tempVector.push_back(startWord);  // to get the process moving we need to have the vector hold our first word
+    
+    vector <int> bucket(dictionary.size());  // this vector is used to keep track of when we use words and make sure no duplicates arise
+
+    for(int i = 0; i < tempVector.size(); i++){    // this for loop goes through each parent word ex: dog, bog, log
         
         if(startWord == endWord){
              break;
             }
-        //origWord == startWord;
-        if(caseNumber == 5) {cout << parentCounter << ". " << tempVector.at(i) << ":  ";}
-        for(int p = 0; p < lengthOfWordsToUse; p++){  //resets the word everytime, changes the number of letter from the first letter to the second   
+        if(caseNumber == 5) {cout << parentCounter << ". " << tempVector.at(i) << ":  ";} // we only print out these counters in case 5
+        for(int p = 0; p < lengthOfWordsToUse; p++){  //resets the word everytime, changes the number of letter from the first letter to the second. iterates form 'd' to 'o' to 'g' 
             
-            startWord = tempVector.at(i);
+            startWord = tempVector.at(i); // resets word so we can go through alphabet for each letter
             
-            //tempVector.push_back(startWord);
             for(int sub = 0; sub <= 25; sub++){   //changes the letter to every of the alphabet, needs to add to a vector
                 
-                startWord[p] = (char)(97 + sub);      //changes letter
-                long locationOfWord = binarySearch(startWord, dictionary);
+                startWord[p] = (char)(97 + sub);      //changes letter, a + sub = corresponding ascii letter
+                long locationOfWord = binarySearch(startWord, dictionary); // value the binarySearch returns
                 if(origWord == startWord){bucket.at(locationOfWord) = 1;}   //check if the changed word is equal to origWord
                             
                   if((locationOfWord != -1) && (bucket.at(locationOfWord) == 0) && ((locationOfWord != 0) || (dictionary.at(locationOfWord - 1) != dictionary.at(locationOfWord)))){// cant binary search temp vector  && (binarySearch(startWord, tempVector) == -1)                 
-                                                                                                               
-                        bucket.at(locationOfWord) = 1;
-                        tempVector.push_back(startWord);            // if both true, add startWord to tempVector
+                  // the above statement checks if the word is valid, if its been used already, and if we will reach a bounds error from checkinng if its been used before, since the dictionary has duplicates, we need to check the one before as well as the value    
+                        bucket.at(locationOfWord) = 1;         // checks off the word has been used
+                        tempVector.push_back(startWord);       // if both true, add startWord to tempVector
                         parentVector.push_back(tempVector[i]); // tempvector[]i
-                        parentIndex.push_back(parentCounter);
-                        //cout << " in case 5 push back test " << startWord << "<- startword " << tempVector[i] << "tempvector[i] " << endl;
-                      
+                        parentIndex.push_back(parentCounter);  // adds a parent count                      
                         childCounter++;
-                        if(caseNumber == 5) {cout << " " << childCounter << ":" << startWord;}                       
+                        if(caseNumber == 5) {cout << " " << childCounter << ":" << startWord;}   // only cout for case 5                 
                       }
             
                         if(startWord == endWord){    //once cat is reached, break cycle, might be not needed
@@ -352,34 +340,35 @@ void case5(vector<string>dictionary, string startWord, string endWord, int lengt
             if(startWord == endWord){    //once cat is reached, break cycle, might be not needed
                             break;
                         }
-        }
+        } // end 2nd for loop
         parentCounter++;
         if(caseNumber == 5) {cout << endl;}
     }
    
-    if (caseNumber == 5 || caseNumber == 6){cout << endl << "Winning sequence was found!" << endl << endl;}
+    if (caseNumber == 5 || caseNumber == 6){cout << endl << "Winning sequence was found!" << endl << endl;} // only cout for case 5 and 6
     
    
-    if (case7bool == true){case7(endWord, startWord, origWord, tempVector, parentVector, parentIndex);}
+    if (caseNumber == 7){case7(endWord, startWord, origWord, tempVector, parentVector, parentIndex);} // only execute if 7 is called
    
-}
+}// end case5
+
 
 //-----------------------------------------------------------------------------------------
 int main()
 {
-    vector< string> dictionary;    		// Vector of dictionary words read in from file
-    int lengthOfWordsToUse = 3;         // Default length of word to use in word transformation
-    string startWord = "dog";           // The start word for transformation
-    string endWord = "cat";             // The end word for transformation
-    int menuOption = -1;                // User menu option selection
-    int totalWords = 0;
-    int caseNumber;
-    int numOfWords[30] = {0};
-    dictionary.clear();
-    bool case7bool = false;
-    vector <int> winningSequence;
-    int startIndex = 0;
-    int endIndex = 0; // array of size 30, each index is the number of words, index 0 is word length 1
+    vector< string> dictionary;  // Vector of dictionary words read in from file
+    int lengthOfWordsToUse = 3;  // Default length of word to use in word transformation
+    string startWord = "dog";    // The start word for transformation
+    string endWord = "cat";      // The end word for transformation
+    int menuOption = -1;         // User menu option selection
+    int totalWords = 0;          // totalWords keeps track of the total amount of words of a certain length
+    int caseNumber;              // case number is a variable that is passed to our case5, since 5,6,7 all share the same function we need to keep track of which is being used
+    int numOfWords[30] = {0};    // holds the amounts of each letter 
+    dictionary.clear();          // makes sure that the count of amount of words for that length does stack on top of each other
+    bool case7bool = false;      // special case to call for 
+    vector <int> winningSequence; // vector that stores the correct sequence for 7
+    int startIndex = 0;           //stops an error from an undefined int
+    int endIndex = 0;             // array of size 30, each index is the number of words, index 0 is word length 1
     int startingWord = 0;
     dictChecker(lengthOfWordsToUse, dictionary, numOfWords, totalWords);
     
@@ -412,57 +401,44 @@ int main()
              << "   8. Exit the program              \n"
              << "Your choice -> " << endl << endl;
            
-        
-       cin >> menuOption;
+        cin >> menuOption;
                
         switch(menuOption){
             case 1:
-                
                 cout << "What length words do you want to use? ";
                 cin >> lengthOfWordsToUse;
                 dictChecker(lengthOfWordsToUse, dictionary, numOfWords, totalWords);   //we have numOfWords[] getting filled but we have not printed it yet               
-                startWord = "";
-                endWord = "";            
-                
+                startWord = ""; //both of these are intialized to empty by default unless changed
+                endWord = "";
                 break;
-                
             case 2:
-                readInWordsFromFile(lengthOfWordsToUse, dictionary);
+                readInWordsFromFile(lengthOfWordsToUse, dictionary); //display dictionary words
                 break;
-                
             case 3:
-                caseThree(dictionary,startWord,endWord,numOfWords,lengthOfWordsToUse);
+                caseThree(dictionary,startWord,endWord,numOfWords,lengthOfWordsToUse); //start and end words
                 break;
             case 4:
-                //wordChangeGame(dictionary,startWord,endWord);
-                wordChangeGame(lengthOfWordsToUse, startWord, endWord, dictionary);
+                wordChangeGame(lengthOfWordsToUse, startWord, endWord, dictionary); //play game, send start end and dictionary
                 break;
-                
             case 5:
-                //cout << "Find the end word with debug " << endl;
                 caseNumber = 5;
-                case5(dictionary, startWord, endWord, lengthOfWordsToUse, caseNumber, winningSequence, case7bool);
+                case5(dictionary, startWord, endWord, lengthOfWordsToUse, caseNumber, winningSequence); //display with debug
                 break;
-                
             case 6:
                 caseNumber = 6;
-                case5(dictionary, startWord, endWord, lengthOfWordsToUse, caseNumber, winningSequence, case7bool);
+                case5(dictionary, startWord, endWord, lengthOfWordsToUse, caseNumber, winningSequence); //no debug
                 break;
-                
             case 7:
-                case7bool = true;
                 caseNumber = 7;
                 cout << "Winning sequence in reverse order is:" << endl;
-                case5(dictionary, startWord, endWord, lengthOfWordsToUse, caseNumber, winningSequence, case7bool);
+                case5(dictionary, startWord, endWord, lengthOfWordsToUse, caseNumber, winningSequence);
                 break;
-                
             case 8:
                 cout << endl << endl << "Exiting the program";
                 exit(-1);
                 break;
-        }
-        
-    } while( true);
+           }//end of switch menuOption
+    } while( true); // end of menu loop
 	
     return 0;
 }//end main()
