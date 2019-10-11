@@ -327,7 +327,8 @@ void case7(string endWord, string startWord, string origWord, vector <string> te
   
     string child = endWord;
     string parent;
-  
+    int z = tempVector.size()-1;
+    cout << setw(5) << z << ". " << child << endl;
     while(child != origWord){
         for(int i = tempVector.size(); i > 0; i--){
             int x = getChildIndex(child, tempVector);
@@ -338,7 +339,7 @@ void case7(string endWord, string startWord, string origWord, vector <string> te
             //cout << " parent vector at x is " << parentVector.at(x);
             //cout << " and " << parentIndex.at(x) << endl;
           //  cout << "parentVector at x = " << parentVector.at(x) << endl;
-            cout << parent << endl;
+            cout << setw(5) << parentIndex.at(x-1) << ". " << parent << endl;
             child = parent;
             if(child == origWord){
                 break;
@@ -439,7 +440,7 @@ void case5(vector<string>dictionary, string startWord, string endWord, int lengt
   // cout << tempVector[344] << " Parents is ... " << parentVector[344];
    // 
    
-    cout << " " << endWord << " " << endl;
+    //cout << " " << endWord << " " << endl;
     case7(endWord, startWord, origWord, tempVector, parentVector, parentIndex);
     /*
     cout << "Elements inside parentVector is: " << endl;
